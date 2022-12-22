@@ -21,21 +21,22 @@ const compScoreDisplay = document.querySelector('#compScore');
 // create selection buttons
 
 function createButtons() {
+    
     const rock = document.createElement('button');
     choiceBtns.appendChild(rock);
     rock.setAttribute('id', 'rock');
     rock.textContent = 'Rock';
+
     const paper = document.createElement('button');
     choiceBtns.appendChild(paper);
     paper.setAttribute('id', 'paper');
     paper.textContent = 'Paper';
+
     const scissors = document.createElement('button');
     choiceBtns.appendChild(scissors);
     scissors.setAttribute('id', 'scissors');
     scissors.textContent = 'Scissors';
 }
-
-createButtons();
 
 // get computer choice 
 
@@ -96,6 +97,7 @@ function playRound(playerSelection, computerSelection) {
 function updateUI() {
     playerScoreDisplay.innerHTML = playerScore;
     compScoreDisplay.innerHTML = compScore;
+    roundResult.innerHTML = playRound(playerChoice, getComputerChoice());
 };
 
 // FUCTIONS CREATED FOR CONSOLE.LOG GAMEPLAY. LEFT HERE FOR REFERENCE
@@ -142,9 +144,11 @@ function startOverButton() {
 function gameOverCheck() {
 
     if (compScore === 5) {
+        updateUI();
         gameOver.innerHTML = 'YOU LOSE THE BATTLE!';
         startOverRequest();
     } else if (playerScore === 5) {
+        updateUI();
         gameOver.innerHTML = 'YOU WIN THE BATTLE!';
         startOverRequest();
     }
@@ -157,22 +161,21 @@ function start() {
 
     rock.addEventListener('click', function(){
         playerChoice = this.id;
-        roundResult.innerHTML = playRound(playerChoice, getComputerChoice());
         updateUI();
         gameOverCheck();
     });
     paper.addEventListener('click', function(){
-        playerChoice = this.id;
-        roundResult.innerHTML = playRound(playerChoice, getComputerChoice());
+        playerChoice = this.id;   
         updateUI();
         gameOverCheck();
     });
     scissors.addEventListener('click', function(){
-        playerChoice = this.id;
-        roundResult.innerHTML = playRound(playerChoice, getComputerChoice());
+        playerChoice = this.id;   
         updateUI();
         gameOverCheck();
     });
 };
+
+createButtons();
 
 start();
