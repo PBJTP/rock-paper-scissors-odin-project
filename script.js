@@ -13,9 +13,29 @@ const roundResult = document.querySelector('#result');
 const gameOver = document.querySelector('#final');
 const playerScoreDisplay = document.querySelector('#playerScore');
 const compScoreDisplay = document.querySelector('#compScore');
-const rock = document.querySelector('#rock');
-const paper = document.querySelector('#paper');
-const scissors = document.querySelector('#scissors');
+
+// const rock = document.querySelector('#rock');
+// const paper = document.querySelector('#paper');
+// const scissors = document.querySelector('#scissors');
+
+// create selection buttons
+
+function createButtons() {
+    const rock = document.createElement('button');
+    choiceBtns.appendChild(rock);
+    rock.setAttribute('id', 'rock');
+    rock.textContent = 'Rock';
+    const paper = document.createElement('button');
+    choiceBtns.appendChild(paper);
+    paper.setAttribute('id', 'paper');
+    paper.textContent = 'Paper';
+    const scissors = document.createElement('button');
+    choiceBtns.appendChild(scissors);
+    scissors.setAttribute('id', 'scissors');
+    scissors.textContent = 'Scissors';
+}
+
+createButtons();
 
 // get computer choice 
 
@@ -109,7 +129,14 @@ function startOverRequest() {
 }
 
 function startOverButton() {
-    location.reload();
+    startOver.remove();
+    createButtons();
+    compScore = 0;
+    playerScore = 0;
+    roundResult.innerHTML = '';
+    gameOver.innerHTML = '';
+    updateUI();
+    start();
 };
 
 function gameOverCheck() {
@@ -125,21 +152,27 @@ function gameOverCheck() {
 
 //click choice button to start round
 
-rock.addEventListener('click', function(){
-    playerChoice = this.id;
-    roundResult.innerHTML = playRound(playerChoice, getComputerChoice());
-    updateUI();
-    gameOverCheck();
-});
-paper.addEventListener('click', function(){
-    playerChoice = this.id;
-    roundResult.innerHTML = playRound(playerChoice, getComputerChoice());
-    updateUI();
-    gameOverCheck();
-});
-scissors.addEventListener('click', function(){
-    playerChoice = this.id;
-    roundResult.innerHTML = playRound(playerChoice, getComputerChoice());
-    updateUI();
-    gameOverCheck();
-});
+
+function start() {
+
+    rock.addEventListener('click', function(){
+        playerChoice = this.id;
+        roundResult.innerHTML = playRound(playerChoice, getComputerChoice());
+        updateUI();
+        gameOverCheck();
+    });
+    paper.addEventListener('click', function(){
+        playerChoice = this.id;
+        roundResult.innerHTML = playRound(playerChoice, getComputerChoice());
+        updateUI();
+        gameOverCheck();
+    });
+    scissors.addEventListener('click', function(){
+        playerChoice = this.id;
+        roundResult.innerHTML = playRound(playerChoice, getComputerChoice());
+        updateUI();
+        gameOverCheck();
+    });
+};
+
+start();
